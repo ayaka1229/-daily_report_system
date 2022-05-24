@@ -36,7 +36,7 @@ public enum AttributeConst {
 
 	//削除フラグ
 	DEL_FLAG_TRUE("1"),
-	DEL_FRAG_FALSE("0"),
+	DEL_FLAG_FALSE("0"),
 
 	//日報管理
 	REPORT("report"),

@@ -24,6 +24,12 @@ public interface JpaConst {
 	String EMP_COL_DELETE_FLAG="delete_flag"; //削除フラグ
 
 
+	int ROLE_ADMIN = 1; //管理者権限ON(管理者)
+    int ROLE_GENERAL = 0; //管理者権限OFF(一般)
+    int EMP_DEL_TRUE = 1; //削除フラグON(削除済み)
+    int EMP_DEL_FALSE = 0; //削除フラグOFF(現役)
+
+
 	//日報テーブル
 	String TABLE_REP = "reports"; //テーブル名
 	//日報テーブルカラム
@@ -46,6 +52,9 @@ public interface JpaConst {
 
 	//NamedQueryのnameとQuery
 	//全ての従業員をidの降順に取得する
+    String Q_EMP_GET_ALL = ENTITY_EMP + ".getAll"; //name
+    String Q_EMP_GET_ALL_DEF = "SELECT e FROM Employee AS e ORDER BY e.id DESC"; //query
+    //全ての従業員の件数を取得する
 	String Q_EMP_COUNT = ENTITY_EMP + ".count";
 	String Q_EMP_COUNT_DEF="SELECT COUNT(e) FROM Employee AS e";
 	//社員番号とハッシュ化済パスワードを条件に未削除の従業員を取得する
