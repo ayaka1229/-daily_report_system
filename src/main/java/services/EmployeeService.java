@@ -52,7 +52,7 @@ public class EmployeeService extends ServiceBase {
     public EmployeeView findOne(String code, String plainPass, String pepper) {
         Employee e = null;
         try {
-            //パスワードのハッシュ化(pepperもかけとくやつ)
+            //パスワードのハッシュ化
             String pass = EncryptUtil.getPasswordEncrypt(plainPass, pepper);
 
             //社員番号とハッシュ化済パスワードを条件に未削除の従業員を1件取得する
@@ -92,7 +92,6 @@ public class EmployeeService extends ServiceBase {
         return employees_count;
     }
 
-
     /**
      * 画面から入力された従業員の登録内容を元にデータを1件作成し、従業員テーブルに登録する
      * @param ev 画面から入力された従業員の登録内容
@@ -122,7 +121,6 @@ public class EmployeeService extends ServiceBase {
         return errors;
     }
 
-
     /**
      * 画面から入力された従業員の更新内容を元にデータを1件作成し、従業員テーブルを更新する
      * @param ev 画面から入力された従業員の登録内容
@@ -138,7 +136,6 @@ public class EmployeeService extends ServiceBase {
         if (!savedEmp.getCode().equals(ev.getCode())) {
             //社員番号を更新する場合
 
-
             //社員番号についてのバリデーションを行う
             validateCode = true;
             //変更後の社員番号を設定する
@@ -149,7 +146,6 @@ public class EmployeeService extends ServiceBase {
         if (ev.getPassword() != null && !ev.getPassword().equals("")) {
             //パスワードに入力がある場合
 
-
             //パスワードについてのバリデーションを行う
             validatePass = true;
 
@@ -158,10 +154,8 @@ public class EmployeeService extends ServiceBase {
                     EncryptUtil.getPasswordEncrypt(ev.getPassword(), pepper));
         }
 
-
         savedEmp.setName(ev.getName()); //変更後の氏名を設定する
         savedEmp.setAdminFlag(ev.getAdminFlag()); //変更後の管理者フラグを設定する
-
 
         //更新日時に現在時刻を設定する
         LocalDateTime today = LocalDateTime.now();
@@ -179,8 +173,6 @@ public class EmployeeService extends ServiceBase {
         return errors;
     }
 
-
-
     /**
      * idを条件に従業員データを論理削除する
      * @param id
@@ -194,7 +186,7 @@ public class EmployeeService extends ServiceBase {
         LocalDateTime today = LocalDateTime.now();
         savedEmp.setUpdatedAt(today);
 
-        //論理削除フラグをたてる(フラグ＝1、削除済み)
+        //論理削除フラグをたてる
         savedEmp.setDeleteFlag(JpaConst.EMP_DEL_TRUE);
 
         //更新処理を行う
@@ -207,7 +199,7 @@ public class EmployeeService extends ServiceBase {
      * @param code 社員番号
      * @param plainPass パスワード
      * @param pepper pepper文字列
-     * @return 認証結果を返却する(成功:true 失敗:false)
+     * @return 認証結果を返却す(成功:true 失敗:false)
      */
     public Boolean validateLogin(String code, String plainPass, String pepper) {
 
@@ -252,7 +244,6 @@ public class EmployeeService extends ServiceBase {
 
     /**
      * 従業員データを更新する
-     * evをeにコピーしている
      * @param ev 画面から入力された従業員の登録内容
      */
     private void update(EmployeeView ev) {

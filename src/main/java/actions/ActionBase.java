@@ -15,34 +15,39 @@ import constants.AttributeConst;
 import constants.ForwardConst;
 import constants.PropertyConst;
 
+/**
+ * 各Actionクラスの親クラス。共通処理を行う。
+ *
+ */
 public abstract class ActionBase {
-	/*各Actionクラスの親クラス。共通処理を行う。*/
-	protected ServletContext context; //Webアプリケーションのコンテキスト情報
-	protected HttpServletRequest request;// リクエスト情報のオブジェクト
-	protected HttpServletResponse response; // レスポンス情報のオブジェクト
+    protected ServletContext context;
+    protected HttpServletRequest request;
+    protected HttpServletResponse response;
 
-	/* 初期化処理
-	 * サーブレットコンテキスト、リクエスト、レスポンスをクラスフィールドに指定
-	 * @param servletContext
-	 * @param servletRequest
-	 * @param servletResponse
-	 */
-	public void init(
-			ServletContext servletContext,
-			HttpServletRequest servletRequest,
-			HttpServletResponse servletResponse) {
-			this.context = servletContext;
-			this.request = servletRequest;
-			this.response = servletResponse;
-	}
+    /**
+     * 初期化処理
+     * サーブレットコンテキスト、リクエスト、レスポンスをクラスフィールドに設定
+     * @param servletContext
+     * @param servletRequest
+     * @param servletResponse
+     */
+    public void init(
+            ServletContext servletContext,
+            HttpServletRequest servletRequest,
+            HttpServletResponse servletResponse) {
+        this.context = servletContext;
+        this.request = servletRequest;
+        this.response = servletResponse;
+    }
 
-	/*フロントコントローラから呼び出されるメソッド
-	 * @throws ServletException
-	 * @throws IOException
-	 */
-	public abstract void process() throws ServletException,IOException;
+    /**
+     * フロントコントローラから呼び出されるメソッド
+     * @throws ServletException
+     * @throws IOException
+     */
+    public abstract void process() throws ServletException, IOException;
 
-	/**
+    /**
      * パラメータのcommandの値に該当するメソッドを実行する
      * @throws ServletException
      * @throws IOException
@@ -56,7 +61,7 @@ public abstract class ActionBase {
             //パラメータからcommandを取得
             String command = request.getParameter(ForwardConst.CMD.getValue());
 
-            //commandに該当するメソッドを実行する
+            //ommandに該当するメソッドを実行する
             //(例: action=Employee command=show の場合 EmployeeActionクラスのshow()メソッドを実行する)
             commandMethod = this.getClass().getDeclaredMethod(command, new Class[0]);
             commandMethod.invoke(this, new Object[0]); //メソッドに渡す引数はなし
@@ -235,4 +240,5 @@ public abstract class ActionBase {
     protected <R> R getContextScope(PropertyConst key) {
         return (R) context.getAttribute(key.getValue());
     }
+
 }
