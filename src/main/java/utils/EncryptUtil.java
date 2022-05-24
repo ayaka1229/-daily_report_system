@@ -1,6 +1,5 @@
 package utils;
 
-//ハッシュ化メソッド
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 

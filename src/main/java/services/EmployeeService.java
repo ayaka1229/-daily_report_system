@@ -8,8 +8,8 @@ import javax.persistence.NoResultException;
 import actions.views.EmployeeConverter;
 import actions.views.EmployeeView;
 import constants.JpaConst;
-import madels.Employee;
-import madels.validators.EmployeeValidator;
+import models.Employee;
+import models.validators.EmployeeValidator;
 import utils.EncryptUtil;
 
 /**
