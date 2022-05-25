@@ -1,6 +1,5 @@
 package services;
 
-
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -12,10 +11,12 @@ import constants.JpaConst;
 import models.Report;
 import models.validators.ReportValidator;
 
+/**
+ * 日報テーブルの操作に関わる処理を行うクラス
+ */
+public class ReportService extends ServiceBase {
 
-//日報テーブルの操作に関わる処理を行うクラス
-public class ReportService extends ServiceBase{
-	/**
+    /**
      * 指定した従業員が作成した日報データを、指定されたページ数の一覧画面に表示する分取得しReportViewのリストで返却する
      * @param employee 従業員
      * @param page ページ数
